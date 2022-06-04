@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Matrizes</string>
+
+    <string name="edt_Linhas">Linhas</string>
+    <string name="edt_colunas">Colunas</string>
+
+    <string name="btn_gerar">Gerar</string>
+    <string name="btn_aleatorio">Aleatorio</string>
 </resources>
