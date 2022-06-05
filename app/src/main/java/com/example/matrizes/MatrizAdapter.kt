@@ -16,7 +16,8 @@ class MatrizAdapter(private val celulas: List<Matriz>): RecyclerView.Adapter<Mat
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-
+        //val(celula) = celulas[position]
+        //holder.edtCelula?.editText?.setText(celula.toString())
     }
 
     override fun getItemCount(): Int = celulas.size
