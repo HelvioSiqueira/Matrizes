@@ -2,7 +2,10 @@ package com.example.matrizes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.core.view.get
 import androidx.recyclerview.widget.GridLayoutManager
@@ -29,12 +32,30 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        btnResolver.setOnClickListener{
+        btnOk.setOnLongClickListener {
+            TODO()
+        }
+
+        btnResolver.setOnClickListener {
+            if (oculto.visibility == View.GONE){
+                TransitionManager.beginDelayedTransition(oculto, AutoTransition())
+                oculto.visibility = View.VISIBLE
+            } else {
+                TransitionManager.beginDelayedTransition(oculto, AutoTransition())
+                oculto.visibility = View.GONE
+            }
+        }
+
+
+        /*
+        btnResolver.setOnClickListener(){
+
+
             //txtResultado.text = celulas[3].celula?.toString()
 
             //Obtem-se o item da celula na posição numero 3
             txtResultado.text = rvMatriz.layoutManager?.findViewByPosition(3)?.EdtCelula?.editText?.text.toString()
-        }
+        }*/
 
 
     }
