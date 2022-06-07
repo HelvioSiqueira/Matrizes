@@ -32,10 +32,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        btnOk.setOnLongClickListener {
-            TODO()
-        }
-
         btnResolver.setOnClickListener {
             if (oculto.visibility == View.GONE){
                 TransitionManager.beginDelayedTransition(oculto, AutoTransition())
@@ -47,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        //Função do botão de pegar o valor do InputText
         /*
         btnResolver.setOnClickListener(){
 
