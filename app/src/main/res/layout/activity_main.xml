@@ -10,19 +10,19 @@
         android:id="@+id/tilLinhas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tilColunas"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintHorizontal_weight="2">
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtLinhas"
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:hint="@string/edt_Linhas"
-            android:lines="1"/>
+            android:lines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -30,89 +30,99 @@
         android:id="@+id/tilColunas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/tilLinhas"
         app:layout_constraintEnd_toStartOf="@id/btnOk"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_weight="2">
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintStart_toEndOf="@id/tilLinhas"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtColunas"
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:hint="@string/edt_colunas"
-            android:lines="1"/>
+            android:lines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnOk"
-        android:text="@string/btn_gerar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/tilColunas"
+        android:text="@string/btn_gerar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_weight="1"/>
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/tilColunas"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMatriz"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/tilLinhas"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/tilLinhas" />
 
     <TextView
         android:id="@+id/txtResultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Oi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/rvMatriz"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/rvMatriz" />
 
-    <Button
-        android:id="@+id/btnResolver"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        app:cardBackgroundColor="#FFCC80"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Testar!"
-        app:layout_constraintStart_toEndOf="@+id/txtResultado"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txtResultado"/>
-
-
-    <!--Linear layout contendo um linear layout com dois butões-->
-    <LinearLayout
-        android:id="@+id/oculto"
-        android:visibility="gone"
-        android:background="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btnResolver"
         app:layout_constraintStart_toEndOf="@id/txtResultado"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="@id/txtResultado"
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <Button
+            android:id="@+id/btnResolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Testar!"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtResultado"
+            app:layout_constraintTop_toTopOf="@id/txtResultado" />
+
+        <!--Linear layout contendo um linear layout com dois butões-->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:id="@+id/oculto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtResultado">
 
-            <Button
-                android:id="@+id/btnTeste"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnTeste2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/btnTeste"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btnTeste2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
