@@ -8,11 +8,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilLinhas"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/tilColunas"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -20,7 +18,7 @@
             android:id="@+id/edtLinhas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:backgroundTint="@color/purple_200"
             android:hint="@string/edt_Linhas"
             android:lines="1" />
 
@@ -28,10 +26,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilColunas"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@id/btnOk"
-        app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@id/tilLinhas"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -39,7 +36,7 @@
             android:id="@+id/edtColunas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:backgroundTint="@color/purple_200"
             android:hint="@string/edt_colunas"
             android:lines="1" />
 
@@ -51,9 +48,9 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_gerar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/tilColunas"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/tilColunas"
+        app:layout_constraintBottom_toBottomOf="@id/tilColunas"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMatriz"
@@ -129,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginVertical="5dp"/>
 
         </LinearLayout>
 
