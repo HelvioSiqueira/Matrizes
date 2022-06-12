@@ -6,4 +6,6 @@
 
     <string name="btn_gerar">Gerar</string>
     <string name="btn_aleatorio">Aleatorio</string>
+
+    <string name="des_btn_ir">Botão Ir</string>
 </resources>

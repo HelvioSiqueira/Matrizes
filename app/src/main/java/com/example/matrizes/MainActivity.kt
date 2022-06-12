@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnOk.setOnClickListener{
-            if(edtLinhas.text!!.isNotEmpty()  && edtColunas.text!!.isNotEmpty()){
+            if((edtLinhas.text!!.isNotEmpty()) && (edtColunas.text!!.isNotEmpty())){
                 gerarMatriz()
 
             } else {
