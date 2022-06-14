@@ -46,17 +46,13 @@ data class Matriz(var celula: Int?) {
         //Cria a variavel que irá armazenar a matriz inversa
         var matriz_I = arrayOf<Array<Any>>()
 
-        //Pega o numero de linhas e colunas(-1 para serem usadas no for que irá começar 0)
-        val tamanhoL = matriz.size - 1
-        val tamanhoC = matriz[0].size - 1
-
-        //O primeiro for servirá para percorrer as linhas
-        for(x in 0..tamanhoC){
+        //O primeiro for servirá para percorrer as colunas
+        for (x in matriz[0].indices) {
             //Cria e zera o array que irá armazenar cada numero da linha
             var linhas = arrayOf<Any>()
 
             //Esse for irá percorrer cada elemento da linha
-            for(y in 0..tamanhoL){
+            for (y in matriz.indices) {
 
                 //Adiciona o elemento atual com os indices invertidos no array de linha
                 linhas += matriz[y][x]
