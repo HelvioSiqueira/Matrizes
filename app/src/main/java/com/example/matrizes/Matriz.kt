@@ -2,35 +2,26 @@ package com.example.matrizes
 
 data class Matriz(var celula: Int?) {
 
-    private fun mostrarMatriz() {
-        fun main() {
+    fun vetorMatriz(array: Array<Any>, colunas: Int): Array<Array<Any>> {
+        var matriz = arrayOf<Array<Any>>()
+        var matrizLinhas = arrayOf<Any>()
 
-            //Cria um array de duas dimensões
-            var matriz = arrayOf<Array<Int>>()
+        var cont = 0
 
-            for (x in 0..3) {
+        array.forEach {
 
-                //Cria o array unidimensional de linha
-                var matriz2 = arrayOf<Int>()
+            matrizLinhas += it
+            cont += 1
 
-                for (y in 0..3) {
+            if (cont == colunas) {
+                matriz += matrizLinhas
 
-                    //Adiciona y a matriz2
-                    matriz2 += y
-                }
+                matrizLinhas = arrayOf()
 
-                //Adiciona matriz2 a matriz
-                matriz += matriz2
-            }
-
-            //Imprime a matriz
-            for (x in matriz) {
-                for (y in x) {
-                    print("$y ")
-                }
-                println()
+                cont = 0
             }
         }
 
+        return matriz
     }
 }
