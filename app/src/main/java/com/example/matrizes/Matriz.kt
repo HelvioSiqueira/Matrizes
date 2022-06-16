@@ -64,5 +64,22 @@ data class Matriz(var celula: Int?) {
         //retorna a matriz
         return matriz_I
     }
+
+    fun somaMatrizes(
+        matriz_1: Array<Array<Double>>,
+        matriz_2: Array<Array<Double>>
+    ): Array<Array<Double>> {
+        var matriz_S = arrayOf<Array<Double>>()
+
+        for (x in matriz_1.indices) {
+            var linha = arrayOf<Double>()
+
+            for (y in matriz_1[0].indices) {
+                linha += (matriz_1[x][y] + matriz_2[x][y])
+            }
+            matriz_S += linha
+        }
+        return matriz_S
+    }
 }
 
