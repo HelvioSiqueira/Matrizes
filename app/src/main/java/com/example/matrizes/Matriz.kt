@@ -4,13 +4,13 @@ data class Matriz(var celula: Int?) {
 
     //Função que transforma um vetor em matriz
     //Ela irá receber um array e a quantidade de colunas e irá retornar um array bidimensional
-    fun vetorMatriz(array: Array<Any>, colunas: Int): Array<Array<Any>> {
+    fun vetorMatriz(array: Array<Double>, colunas: Int): Array<Array<Double>> {
 
         //Cria o array bidimensional
-        var matriz = arrayOf<Array<Any>>()
+        var matriz = arrayOf<Array<Double>>()
 
         //Cria um array para armazenar as linhas
-        var matrizLinhas = arrayOf<Any>()
+        var matrizLinhas = arrayOf<Double>()
 
         //Contador que irá contar a quantidade de numeros armazenados na linha
         var cont = 0
@@ -38,7 +38,7 @@ data class Matriz(var celula: Int?) {
     }
 
     //Função que inverte a matriz
-    fun matrizInversa(array: Array<Any>, colunas: Int): Array<Array<Any>>{
+    fun matrizInversa(array: Array<Double>, colunas: Int): Array<Array<Any>> {
 
         //Começa transformando um vetor em uma matriz
         val matriz = vetorMatriz(array, colunas)
