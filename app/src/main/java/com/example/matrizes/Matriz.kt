@@ -81,5 +81,47 @@ data class Matriz(var celula: Int?) {
         }
         return matriz_S
     }
+
+    fun multMatrizes(
+        matriz_1: Array<Array<Double>>,
+        matriz_2: Array<Array<Double>>
+    ): Array<Array<Double>> {
+        var matriz_M = arrayOf<Array<Double>>()
+
+        //Cria a matriz vazia tendo como base a quantidade de colunas de matriz_2
+        //e a quantidade de linhas em matriz_1
+        for (x in matriz_2[0].indices) {
+            var linha = arrayOf<Double>()
+
+            for (y in matriz_1.indices) {
+                linha += 0.0
+            }
+            matriz_M += linha
+        }
+
+        var cont_l = 0
+        var cont_c = 0
+        var mult = 0.0
+
+        for (x in matriz_1.indices) {
+            for (y in matriz_2[0].indices) {
+                var soma = 0.0
+
+                for (z in matriz_1[0].indices) {
+                    mult = matriz_1[x][z] * matriz_2[cont_l][cont_c]
+                    soma += mult
+
+                    cont_l++
+                }
+                matriz_M[x][y] = soma
+
+                cont_l = 0
+                cont_c += 1
+            }
+            cont_c = 0
+        }
+
+        return matriz_M
+    }
 }
 
