@@ -65,31 +65,43 @@ data class Matriz(var celula: Int?) {
         return matriz_I
     }
 
+    //Função que soma DUAS matrizes
+    //Ela precisará já receber em formato de matrizes
+    //Então ela deve primeiro passa pela fun vetorMatriz()
     fun somaMatrizes(
         matriz_1: Array<Array<Double>>,
         matriz_2: Array<Array<Double>>
     ): Array<Array<Double>> {
         var matriz_S = arrayOf<Array<Double>>()
 
+        //O primeiro for percorre as linhas da matriz_1
+        //(Poderia ser qualquer das duas matrizes somadas já que elas devem ser iguais em tamanho)
         for (x in matriz_1.indices) {
+            //Array pra armazenar a linha
             var linha = arrayOf<Double>()
 
+            //For que percorre as colunas e soma os valores
             for (y in matriz_1[0].indices) {
                 linha += (matriz_1[x][y] + matriz_2[x][y])
             }
+            //Adiciona a linha na matriz
             matriz_S += linha
         }
+        //Retorna a matriz
         return matriz_S
     }
 
+    //Função que multiplica matrizes
+    //Ela precisará já receber em formato de matrizes
+    //Então ela deve primeiro passa pela fun vetorMatriz()
     fun multMatrizes(
         matriz_1: Array<Array<Double>>,
         matriz_2: Array<Array<Double>>
     ): Array<Array<Double>> {
         var matriz_M = arrayOf<Array<Double>>()
 
-        //Cria a matriz vazia tendo como base a quantidade de colunas de matriz_2
-        //e a quantidade de linhas em matriz_1
+        //Cria uma matriz de 0 tendo como base a quantidade de linhas de matriz_1
+        //e a quantidade de colunas em matriz_2
         for (x in matriz_2[0].indices) {
             var linha = arrayOf<Double>()
 
@@ -99,12 +111,20 @@ data class Matriz(var celula: Int?) {
             matriz_M += linha
         }
 
+        //Cont_l irá salvar a prox linha da matriz_2 pela qual dever ser mult pela matriz_1
+        //Irá mudar a cada volta do loop z sendo assim ela multiplicada na vertical
         var cont_l = 0
+
+        //Conta_c irá salvar a prox coluna da matriz_2 pela qual dever ser mult pela matriz_1
+        //Irá mudar a cada volta do loop y indicando assim a prox coluna a ser multiplicada na vertical
         var cont_c = 0
+
+        //Irá armazenar a multiplicação do elemento de matriz_1 com matriz_2 a cada volta em z
         var mult = 0.0
 
         for (x in matriz_1.indices) {
             for (y in matriz_2[0].indices) {
+                //Irá armazenar a soma das multiplicações
                 var soma = 0.0
 
                 for (z in matriz_1[0].indices) {
@@ -113,6 +133,8 @@ data class Matriz(var celula: Int?) {
 
                     cont_l++
                 }
+
+                //Adiciona a soma no seu lugar na matriz_M
                 matriz_M[x][y] = soma
 
                 cont_l = 0
