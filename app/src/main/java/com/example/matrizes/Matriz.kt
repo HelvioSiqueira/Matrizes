@@ -168,7 +168,7 @@ data class Matriz(var celula: Int?) {
             }
             println()
         }
-
+//
         var indo = arrayOf<Double>()
         var voltando = arrayOf<Double>()
 
