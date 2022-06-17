@@ -148,37 +148,70 @@ data class Matriz(var celula: Int?) {
         return matriz_M
     }
 
+    //Função que calcula o determinante de uma matriz de ordem até 3
+    //Ela precisará já receber em formato de matrizes
+    //Então ela deve primeiro passa pela fun vetorMatriz()
     fun determinante(matriz: Array<Array<Double>>): Double {
 
-        var matriz_D = addColunas(matriz)
+        //Adiciona as duas colunas que seram necessarias na formula de Sarras
+        val matriz_D = addColunas(matriz)
 //
+        //Vetores que irão armazenas as operações na diagonal indo e voltando na matriz
         var indo = arrayOf<Double>()
         var voltando = arrayOf<Double>()
 
+        //Cont irá indicar a prox posição de coluna na diagonal(x também mudará a cada loop)
         var cont = 0
+
+        //00 * * * *    * 01 * * *     * * 02 * *
+        //* 11 * * *    * * 12 * *     * * * 13 *
+        //* * 22 * *    * * * 23 *     * * * * 24
+
+        //c irá rodar 3 vezes para obter o resultado nas 3 diagonais indo
         for (c in 0..2) {
+            //Irá armazenar a multiplicação da diagonal
             var mult = 0.0
 
+            //x será as linhas
             for (x in matriz_D.indices) {
+                //Se for a primeira linha mult receberá direto o elemento de matriz_D[x][cont]
+                //(Se não for assim o elemento será multiplicado por 0 e o resultado será sempre 0)
                 if (x == 0) {
                     mult = matriz_D[x][cont]
                 } else {
                     mult *= matriz_D[x][cont]
                 }
 
+                //Incrementa cont para indicar a prox coluna na linha de baixo e assim vai
                 cont++
             }
+            //Será somado +1 e o c atual(na primeira vez o valor atribuido a cont será 1 já c ainda é 0)
+            //E indicará a coluna que cont irá começar a contar no prox loop de c
             cont = c + 1
 
+            //Adiciona mult no array
             indo += mult
         }
 
+        //cont agora receberá o indice do ultimo elemento em qualquer linha
+        //Como agora as operações serão feitas na 3 diagonais voltando cont será decrementado
         cont = matriz_D[0].size - 1
+
+        //contInicial irá salvar a posição inicial de cont
+        //Ele servirá pra reiniciar o valor de cont(Já que ele será decrementado no loop x)
+        //Quando ele for reiniciado(contInicial--) ele representará a prox coluna inicial no loop x
         var contInicial = cont
 
+        //* * * * 04    * * * 03 *     * * 02 * *
+        //* * * 13 *    * * 12 * *     * 11 * * *
+        //* * 22 * *    * 21 * * *     20 * * * *
+
+        //c irá rodar 3 vezes para obter o resultado nas 3 diagonais voltando
         for (c in 0..2) {
+            //Irá armazenar a multiplicação da diagonal
             var mult = 0.0
 
+            //x será as linhas
             for (x in matriz_D.indices) {
 
                 if (x == 0) {
@@ -201,17 +234,27 @@ data class Matriz(var celula: Int?) {
         return ind - vol
     }
 
+    //Função que adiciona as colunas necessarias(0 e 1) para formula de Sarras
     fun addColunas(matriz: Array<Array<Double>>): Array<Array<Double>> {
 
         var matriz_D = arrayOf<Array<Double>>()
         var linha = arrayOf<Double>()
 
         for (y in matriz) {
+
+            //Add a linha da matriz
             linha += y
+
+            //Add o primeiro elemento a linha já add
             linha += y[0]
+
+            //Add o segundo elemento a linha já addp
             linha += y[1]
 
+            //Adiciona a linha à matriz
             matriz_D += linha
+
+            //Reinicia o array
             linha = arrayOf()
         }
 
