@@ -1,5 +1,7 @@
 package com.example.matrizes
 
+import java.lang.Double.sum
+
 data class Matriz(var celula: Int?) {
 
     //Função que transforma um vetor em matriz
@@ -144,6 +146,76 @@ data class Matriz(var celula: Int?) {
         }
 
         return matriz_M
+    }
+
+    fun determinante(matriz: Array<Array<Double>>): Double {
+
+        var matriz_D = arrayOf<Array<Double>>()
+        var linha_D = arrayOf<Double>()
+
+        for (y in matriz) {
+            linha_D += y
+            linha_D += y[0]
+            linha_D += y[1]
+
+            matriz_D += linha_D
+            linha_D = arrayOf()
+        }
+
+        for (x in matriz_D) {
+            for (y in x) {
+                print("${y} ")
+            }
+            println()
+        }
+
+        var indo = arrayOf<Double>()
+        var voltando = arrayOf<Double>()
+
+        var cont = 0
+        for (c in 0..2) {
+            var mult = 0.0
+
+            for (x in matriz_D.indices) {
+                if (x == 0) {
+                    mult = matriz_D[x][cont]
+                } else {
+                    mult *= matriz_D[x][cont]
+                }
+
+                cont++
+            }
+            cont = c + 1
+
+            indo += mult
+        }
+
+        cont = matriz_D[0].size - 1
+        var contInicial = cont
+
+        for (c in 0..2) {
+            var mult = 0.0
+
+            for (x in matriz_D.indices) {
+
+                if (x == 0) {
+                    mult = matriz_D[x][cont]
+                } else {
+                    mult *= matriz_D[x][cont]
+                }
+
+                cont--
+            }
+
+            cont = contInicial - 1
+            contInicial--
+
+            voltando += mult
+        }
+        val ind = sum(indo[0], indo[1] + indo[2])
+        val vol = sum(voltando[0], voltando[1] + voltando[2])
+
+        return ind - vol
     }
 }
 
