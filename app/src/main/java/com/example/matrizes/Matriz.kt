@@ -37,6 +37,18 @@ data class Matriz(var celula: Int?) {
         return matriz
     }
 
+    //Transforma uma matriz em um vetor novamente
+    fun matrizVetor(matriz: Array<Array<Double>>): Array<Double>{
+
+        var vetor = arrayOf<Double>()
+
+        for(linha in matriz){
+            vetor += linha
+        }
+
+        return vetor
+    }
+
     //Função que inverte a matriz
     fun matrizInversa(array: Array<Double>, colunas: Int): Array<Array<Any>> {
 
@@ -153,7 +165,7 @@ data class Matriz(var celula: Int?) {
 
         //Adiciona as duas colunas que seram necessarias na formula de Sarras
         val matriz_D = addColunas(matriz)
-//
+
         //Vetores que irão armazenas as operações na diagonal indo e voltando na matriz
         var indo = arrayOf<Double>()
         var voltando = arrayOf<Double>()
