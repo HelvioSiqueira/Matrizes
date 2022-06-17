@@ -1,7 +1,5 @@
 package com.example.matrizes
 
-import java.lang.Double.sum
-
 data class Matriz(var celula: Int?) {
 
     //Função que transforma um vetor em matriz
@@ -228,8 +226,8 @@ data class Matriz(var celula: Int?) {
 
             voltando += mult
         }
-        val ind = sum(indo[0], indo[1] + indo[2])
-        val vol = sum(voltando[0], voltando[1] + voltando[2])
+        val ind = indo[0] + indo[1] + indo[2]
+        val vol = voltando[0] + voltando[1] + voltando[2]
 
         return ind - vol
     }
