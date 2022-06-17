@@ -150,24 +150,7 @@ data class Matriz(var celula: Int?) {
 
     fun determinante(matriz: Array<Array<Double>>): Double {
 
-        var matriz_D = arrayOf<Array<Double>>()
-        var linha_D = arrayOf<Double>()
-
-        for (y in matriz) {
-            linha_D += y
-            linha_D += y[0]
-            linha_D += y[1]
-
-            matriz_D += linha_D
-            linha_D = arrayOf()
-        }
-
-        for (x in matriz_D) {
-            for (y in x) {
-                print("${y} ")
-            }
-            println()
-        }
+        var matriz_D = addColunas(matriz)
 //
         var indo = arrayOf<Double>()
         var voltando = arrayOf<Double>()
@@ -216,6 +199,23 @@ data class Matriz(var celula: Int?) {
         val vol = sum(voltando[0], voltando[1] + voltando[2])
 
         return ind - vol
+    }
+
+    fun addColunas(matriz: Array<Array<Double>>): Array<Array<Double>> {
+
+        var matriz_D = arrayOf<Array<Double>>()
+        var linha = arrayOf<Double>()
+
+        for (y in matriz) {
+            linha += y
+            linha += y[0]
+            linha += y[1]
+
+            matriz_D += linha
+            linha = arrayOf()
+        }
+
+        return matriz_D
     }
 }
 
