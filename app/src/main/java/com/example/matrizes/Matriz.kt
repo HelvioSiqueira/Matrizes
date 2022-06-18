@@ -1,6 +1,6 @@
 package com.example.matrizes
 
-data class Matriz(var celula: Int?) {
+class Matriz() {
 
     //Função que transforma um vetor em matriz
     //Ela irá receber um array e a quantidade de colunas e irá retornar um array bidimensional
@@ -38,11 +38,11 @@ data class Matriz(var celula: Int?) {
     }
 
     //Transforma uma matriz em um vetor novamente
-    fun matrizVetor(matriz: Array<Array<Double>>): Array<Double>{
+    fun matrizVetor(matriz: Array<Array<Double>>): Array<Double> {
 
         var vetor = arrayOf<Double>()
 
-        for(linha in matriz){
+        for (linha in matriz) {
             vetor += linha
         }
 
@@ -271,4 +271,3 @@ data class Matriz(var celula: Int?) {
         return matriz_D
     }
 }
-

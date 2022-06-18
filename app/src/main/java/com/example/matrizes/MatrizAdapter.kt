@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.item_matriz.view.*
 
-class MatrizAdapter(private val celulas: List<Matriz>): RecyclerView.Adapter<MatrizAdapter.VH>(){
+class MatrizAdapter(private val celulas: List<Celula>) : RecyclerView.Adapter<MatrizAdapter.VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_matriz, parent, false)

@@ -4,20 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.core.view.get
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.transition.Transition
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.item_matriz.*
-import kotlinx.android.synthetic.main.item_matriz.view.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var celulas = mutableListOf<Matriz>()
+    private var celulas = mutableListOf<Celula>()
     private var adapter = MatrizAdapter(celulas)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun addCelula(){
-        val celula = Matriz(null)
+        val celula = Celula(null)
 
         celulas.add(celula)
         adapter.notifyItemInserted(celulas.lastIndex)
