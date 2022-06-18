@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,9 +19,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        btnOk.setOnLongClickListener {
+            if((edtLinhas.text!!.isNotEmpty()) && (edtColunas.text!!.isNotEmpty())){
+                gerarMatriz(true)
+
+            } else {
+                Toast.makeText(this, "Coloque as linhas e colunas!", Toast.LENGTH_LONG).show()
+            }
+
+            return@setOnLongClickListener true
+        }
+
         btnOk.setOnClickListener{
             if((edtLinhas.text!!.isNotEmpty()) && (edtColunas.text!!.isNotEmpty())){
-                gerarMatriz()
+                gerarMatriz(false)
 
             } else {
                 Toast.makeText(this, "Coloque as linhas e colunas!", Toast.LENGTH_LONG).show()
@@ -67,7 +79,16 @@ class MainActivity : AppCompatActivity() {
         adapter.notifyItemInserted(celulas.lastIndex)
     }
 
-    private fun gerarMatriz(){
+    private fun addCelulaAleatoria(){
+        val numero = Random.nextInt(20)
+
+        val celula = Celula(numero)
+
+        celulas.add(celula)
+        adapter.notifyItemInserted(celulas.lastIndex)
+    }
+
+    private fun gerarMatriz(aleatorio: Boolean){
 
             if(celulas.isNotEmpty()){
                 celulas.clear()
@@ -86,8 +107,14 @@ class MainActivity : AppCompatActivity() {
 
             initRecyclerView(colunas)
 
-            for(x in 1..colunas * linhas){
-                addCelula()
+            if(aleatorio){
+                for(x in 1..colunas * linhas){
+                    addCelulaAleatoria()
+                }
+            }else{
+                for(x in 1..colunas * linhas){
+                    addCelula()
+                }
             }
     }
 }
