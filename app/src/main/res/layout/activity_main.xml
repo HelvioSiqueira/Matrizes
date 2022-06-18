@@ -18,9 +18,8 @@
             android:id="@+id/edtLinhas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/purple_200"
             android:hint="@string/edt_Linhas"
-            android:lines="1" />
+            android:lines="1"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -36,7 +35,6 @@
             android:id="@+id/edtColunas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/purple_200"
             android:hint="@string/edt_colunas"
             android:lines="1" />
 
@@ -88,6 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:src="@drawable/ic_add_24"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,18 +111,44 @@
             android:orientation="vertical">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btnTeste"
+                android:id="@+id/btnSoma"
                 android:layout_width="wrap_content"
-                app:backgroundTint="@color/purple_200"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:backgroundTint="@color/purple_200"
+                android:src="@drawable/ic_multpl_24"
                 android:clickable="true"
                 android:focusable="true"
                 />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btnTeste2"
+                android:id="@+id/btnMultiplicar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:backgroundTint="@color/purple_200"
+                android:src="@drawable/ic_add_24"
+                android:clickable="true"
+                android:focusable="true"
+                />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnTransversa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:backgroundTint="@color/purple_200"
+                android:src="@drawable/ic_t"
+                android:clickable="true"
+                android:focusable="true"
+                />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnDetarminante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/purple_200"
+                android:src="@drawable/ic_baseline_label_important_24"
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_marginVertical="5dp"/>
