@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnOk.setOnLongClickListener {
-            if((edtLinhas.text!!.isNotEmpty()) && (edtColunas.text!!.isNotEmpty())){
+            //Checa se os inputText não são vazios antes de gerar a matriz
+            if ((edtLinhas.text!!.isNotEmpty()) && (edtColunas.text!!.isNotEmpty())) {
                 gerarMatriz(true)
 
             } else {
@@ -30,8 +31,9 @@ class MainActivity : AppCompatActivity() {
             return@setOnLongClickListener true
         }
 
-        btnOk.setOnClickListener{
-            if((edtLinhas.text!!.isNotEmpty()) && (edtColunas.text!!.isNotEmpty())){
+        btnOk.setOnClickListener {
+            //Checa se os inputText não são vazios antes de gerar a matriz
+            if ((edtLinhas.text!!.isNotEmpty()) && (edtColunas.text!!.isNotEmpty())) {
                 gerarMatriz(false)
 
             } else {
@@ -39,8 +41,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //Torna visivel os botões ocultados de cada operação de matriz
         btnResolver.setOnClickListener {
-            if (oculto.visibility == View.GONE){
+            if (oculto.visibility == View.GONE) {
                 TransitionManager.beginDelayedTransition(oculto, AutoTransition())
                 oculto.visibility = View.VISIBLE
             } else {
@@ -63,7 +66,10 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    private fun initRecyclerView(colunas: Int){
+
+    //Função que inicia o adapter com o RecycleView
+    //De acordo como o layout for definido
+    private fun initRecyclerView(colunas: Int) {
         rvMatriz.adapter = adapter
 
         val layoutManager = GridLayoutManager(this, colunas)
@@ -72,14 +78,17 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun addCelula(){
+    //Adiciona a celula nula ao mutableList e notifica
+    //o adapter que foi inserida um celula
+    private fun addCelula() {
         val celula = Celula(null)
 
         celulas.add(celula)
         adapter.notifyItemInserted(celulas.lastIndex)
     }
 
-    private fun addCelulaAleatoria(){
+    //Adiciona um valor aleatorio para a celula
+    private fun addCelulaAleatoria() {
         val numero = Random.nextInt(20)
 
         val celula = Celula(numero)
@@ -88,33 +97,42 @@ class MainActivity : AppCompatActivity() {
         adapter.notifyItemInserted(celulas.lastIndex)
     }
 
-    private fun gerarMatriz(aleatorio: Boolean){
+    //Gera a matriz conforme os valores inseridos nos textInput de linha e colunas
+    private fun gerarMatriz(aleatorio: Boolean) {
 
-            if(celulas.isNotEmpty()){
-                celulas.clear()
+        //Caso a mutableList não esteja vazia(Na segunda vez que a matriz for gerada)
+        //linha toda as celulas nele
+        if (celulas.isNotEmpty()) {
+            celulas.clear()
+        }
+
+        //Obtem os valores nos textInput(vem como string)
+        val edtLinha = edtLinhas.text.toString()
+        val edtColuna = edtColunas.text.toString()
+
+        //Transforma pra int
+        val colunas = edtColuna.toInt()
+        val linhas = edtLinha.toInt()
+
+        //Limpa os inputText
+        edtColunas.text?.clear()
+        edtLinhas.text?.clear()
+
+        //Seleciona onde o cursor irá parar
+        edtLinhas.requestFocus()
+
+
+        initRecyclerView(colunas)
+
+        //Se aleatorio for true gera a matriz já preenchida com valores aleatorios
+        if (aleatorio) {
+            for (x in 1..colunas * linhas) {
+                addCelulaAleatoria()
             }
-
-            val edtLinha = edtLinhas.text.toString()
-            val edtColuna = edtColunas.text.toString()
-
-            val colunas = edtColuna.toInt()
-            val linhas = edtLinha.toInt()
-
-            edtColunas.text?.clear()
-            edtLinhas.text?.clear()
-
-            edtLinhas.requestFocus()
-
-            initRecyclerView(colunas)
-
-            if(aleatorio){
-                for(x in 1..colunas * linhas){
-                    addCelulaAleatoria()
-                }
-            }else{
-                for(x in 1..colunas * linhas){
-                    addCelula()
-                }
+        } else {
+            for (x in 1..colunas * linhas) {
+                addCelula()
             }
+        }
     }
 }
