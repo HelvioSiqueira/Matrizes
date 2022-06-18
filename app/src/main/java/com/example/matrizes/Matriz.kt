@@ -1,6 +1,6 @@
 package com.example.matrizes
 
-class Matriz() {
+class Matriz(vetor: Array<Double>, colunas: Int) {
 
     //Função que transforma um vetor em matriz
     //Ela irá receber um array e a quantidade de colunas e irá retornar um array bidimensional

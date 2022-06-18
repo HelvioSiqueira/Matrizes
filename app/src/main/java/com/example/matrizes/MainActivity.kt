@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private var celulas = mutableListOf<Celula>()
     private var adapter = MatrizAdapter(celulas)
+    private var COLUNAS = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,20 @@ class MainActivity : AppCompatActivity() {
                 TransitionManager.beginDelayedTransition(oculto, AutoTransition())
                 oculto.visibility = View.GONE
             }
+        }
+
+        btnDeterminante.setOnClickListener{
+
+            var vetor = arrayOf<Double>()
+
+            //Pega os valores das celulas
+            for(x in celulas){
+                vetor += x.celula!!.toDouble()
+            }
+
+            txtResultado.text = vetor.joinToString()
+
+            //var matriz = Matriz(vetor, COLUNAS)
         }
 
 
@@ -113,6 +128,8 @@ class MainActivity : AppCompatActivity() {
         //Transforma pra int
         val colunas = edtColuna.toInt()
         val linhas = edtLinha.toInt()
+
+        COLUNAS = colunas
 
         //Limpa os inputText
         edtColunas.text?.clear()
