@@ -1,6 +1,23 @@
 package com.example.matrizes
 
-class Matriz(vetor: Array<Double>, colunas: Int) {
+class Matriz(vetor: Array<Array<Double>>, colunas: Array<Int>) {
+
+    //Para ser posivel somar e multiplicar transformei
+    //a matriz em uma lista de matrizes
+    //As funções matrizInversa() e determinante() irão agir nas
+    //ultimas matrizes dessa lista
+    private var matriz = arrayOf<Array<Array<Double>>>()
+
+    //Inicia o vetor transformando-o em uma matriz
+    init {
+        for (x in vetor.indices) {
+            matriz += vetorMatriz(vetor[x], colunas[x])
+        }
+    }
+
+    fun getMatriz(): Array<Array<Double>> {
+        return matriz.last()
+    }
 
     //Função que transforma um vetor em matriz
     //Ela irá receber um array e a quantidade de colunas e irá retornar um array bidimensional
@@ -50,24 +67,23 @@ class Matriz(vetor: Array<Double>, colunas: Int) {
     }
 
     //Função que inverte a matriz
-    fun matrizInversa(array: Array<Double>, colunas: Int): Array<Array<Any>> {
+    fun matrizInversa(): Array<Array<Any>> {
 
-        //Começa transformando um vetor em uma matriz
-        val matriz = vetorMatriz(array, colunas)
+        var matriz_u = matriz.last()
 
         //Cria a variavel que irá armazenar a matriz inversa
         var matriz_I = arrayOf<Array<Any>>()
 
         //O primeiro for servirá para percorrer as colunas
-        for (x in matriz[0].indices) {
+        for (x in matriz_u[0].indices) {
             //Cria e zera o array que irá armazenar cada numero da linha
             var linhas = arrayOf<Any>()
 
             //Esse for irá percorrer cada elemento da linha
-            for (y in matriz.indices) {
+            for (y in matriz_u.indices) {
 
                 //Adiciona o elemento atual com os indices invertidos no array de linha
-                linhas += matriz[y][x]
+                linhas += matriz_u[y][x]
             }
             //Adiciona a linha na matriz
             matriz_I += linhas
@@ -80,10 +96,11 @@ class Matriz(vetor: Array<Double>, colunas: Int) {
     //Função que soma DUAS matrizes
     //Ela precisará já receber em formato de matrizes
     //Então ela deve primeiro passa pela fun vetorMatriz()
-    fun somaMatrizes(
-        matriz_1: Array<Array<Double>>,
-        matriz_2: Array<Array<Double>>
-    ): Array<Array<Double>> {
+    fun somaMatrizes(): Array<Array<Double>> {
+
+        var matriz_1 = matriz[0]
+        var matriz_2 = matriz[1]
+
         var matriz_S = arrayOf<Array<Double>>()
 
         //O primeiro for percorre as linhas da matriz_1
@@ -104,12 +121,15 @@ class Matriz(vetor: Array<Double>, colunas: Int) {
     }
 
     //Função que multiplica matrizes
+    //(Para ser possivel multiplicar o numero de colunas de matriz_1 deve ser
+    // igual ao numero de linhas de matriz_2)
     //Ela precisará já receber em formato de matrizes
     //Então ela deve primeiro passa pela fun vetorMatriz()
-    fun multMatrizes(
-        matriz_1: Array<Array<Double>>,
-        matriz_2: Array<Array<Double>>
-    ): Array<Array<Double>> {
+    fun multMatrizes(): Array<Array<Double>> {
+
+        var matriz_1 = matriz[0]
+        var matriz_2 = matriz[1]
+
         var matriz_M = arrayOf<Array<Double>>()
 
         //Cria uma matriz de 0 tendo como base a quantidade de linhas de matriz_1
@@ -146,6 +166,7 @@ class Matriz(vetor: Array<Double>, colunas: Int) {
                     cont_l++
                 }
 
+                //println("Indices $x | $y")
                 //Adiciona a soma no seu lugar na matriz_M
                 matriz_M[x][y] = soma
 
@@ -159,12 +180,15 @@ class Matriz(vetor: Array<Double>, colunas: Int) {
     }
 
     //Função que calcula o determinante de uma matriz de ordem até 3
+    //(E ela deve ser quadrada linhas = colunas)
     //Ela precisará já receber em formato de matrizes
     //Então ela deve primeiro passa pela fun vetorMatriz()
-    fun determinante(matriz: Array<Array<Double>>): Double {
+    fun determinante(): Double {
+
+        var matriz_u = matriz.last()
 
         //Adiciona as duas colunas que seram necessarias na formula de Sarras
-        val matriz_D = addColunas(matriz)
+        val matriz_D = addColunas(matriz_u)
 
         //Vetores que irão armazenas as operações na diagonal indo e voltando na matriz
         var indo = arrayOf<Double>()

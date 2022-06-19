@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_matriz.*
+import kotlinx.android.synthetic.main.item_matriz.view.*
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -58,13 +60,18 @@ class MainActivity : AppCompatActivity() {
             var vetor = arrayOf<Double>()
 
             //Pega os valores das celulas
-            for(x in celulas){
-                vetor += x.celula!!.toDouble()
+            for(x in celulas.indices){
+
+                //Quando a matriz é gerada com numeros aleatorios ela já vai adicionada com os valores
+                //Mas quando é adicionado um por um não é assim, pois os elementos em cada celula em valor nulo
+                //Aqui eu pego cada elemento na matriz por meio da posição da view no mutableList
+                val numero_na_celula = rvMatriz.layoutManager?.findViewByPosition(x)?.EdtCelula?.editText?.text.toString()
+
+                vetor += numero_na_celula.toDouble()
             }
+            val matriz = Matriz(arrayOf(vetor), arrayOf(COLUNAS))
 
-            txtResultado.text = vetor.joinToString()
-
-            //var matriz = Matriz(vetor, COLUNAS)
+            txtResultado.text = matriz.determinante().toString()
         }
 
 
@@ -122,8 +129,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Obtem os valores nos textInput(vem como string)
-        val edtLinha = edtLinhas.text.toString()
-        val edtColuna = edtColunas.text.toString()
+        //.trim() remove os espaços antes e depois do numero
+        val edtLinha = edtLinhas.text.toString().trim()
+        val edtColuna = edtColunas.text.toString().trim()
 
         //Transforma pra int
         val colunas = edtColuna.toInt()
