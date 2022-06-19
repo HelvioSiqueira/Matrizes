@@ -55,19 +55,28 @@ class Matriz(vetor: Array<Array<Double>>, colunas: Array<Int>) {
     }
 
     //Transforma uma matriz em um vetor novamente
-    fun matrizVetor(matriz: Array<Array<Double>>): Array<Double> {
+    fun matrizVetor(matriz: Array<Array<Double>>): DoubleArray {
 
-        var vetor = arrayOf<Double>()
+        var vetor = doubleArrayOf()
 
         for (linha in matriz) {
-            vetor += linha
+            for(x in linha){
+                vetor += x
+            }
         }
 
         return vetor
     }
 
+    fun getColunas(matriz: Array<Array<Double>>): Int {
+
+        return matriz[0].size
+    }
+
     //Função que inverte a matriz
     fun matrizInversa(): Array<Array<Any>> {
+
+        val vetor_colunas = mutableListOf<Double>()
 
         var matriz_u = matriz.last()
 

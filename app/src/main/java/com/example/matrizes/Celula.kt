@@ -1,4 +1,4 @@
 package com.example.matrizes
 
-data class Celula(var celula: Int?)
+data class Celula(var celula: Double?)
 

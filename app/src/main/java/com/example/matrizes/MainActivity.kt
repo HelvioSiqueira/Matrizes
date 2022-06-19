@@ -1,14 +1,17 @@
 package com.example.matrizes
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_matriz.view.*
+import org.parceler.Parcels
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -89,13 +92,46 @@ class MainActivity : AppCompatActivity() {
             val matriz = Matriz(lista_vetores, lista_colunas)
 
             try {
-                matriz.somaMatrizes()
+                val matriz_S = matriz.somaMatrizes()
+                val matriz_S_vetor = matriz.matrizVetor(matriz_S)
+                val matriz_S_colunas = matriz.getColunas(matriz_S)
 
                 Toast.makeText(this, "Somado", Toast.LENGTH_LONG).show()
+
+                val intent = Intent(this, ResultanteActivity::class.java)
+
+                Log.i("HSV", "${matriz_S_vetor.joinToString()}")
+                Log.i("HSV", "$matriz_S_colunas")
+
+                intent.putExtra("colunas", matriz_S_colunas)
+                intent.putExtra("array", matriz_S_vetor)
+
+                startActivity(intent)
+
+                txtResultado.text = matriz_S_vetor.toString()
             }
 
             catch (e: Exception){
                 Toast.makeText(this, "As matrizes são diferentes!", Toast.LENGTH_LONG).show()
+            }
+
+            finally {
+                lista_vetores = arrayOf<Array<Double>>()
+                lista_colunas = arrayOf<Int>()
+            }
+        }
+
+        btnMultiplicar.setOnClickListener{
+            val matriz = Matriz(lista_vetores, lista_colunas)
+
+            try {
+                matriz.multMatrizes()
+
+                Toast.makeText(this, "Multiplicado", Toast.LENGTH_LONG).show()
+            }
+
+            catch (e: Exception){
+                Toast.makeText(this, "L da matriz 1 deve ser igual a C da matriz 25", Toast.LENGTH_LONG).show()
             }
 
             finally {
@@ -127,19 +163,11 @@ class MainActivity : AppCompatActivity() {
             quantMatrizes.visibility = View.VISIBLE
         }
 
+        btnTransversa.setOnClickListener{
+            val matriz = Matriz(lista_vetores, lista_colunas)
 
-        //Função do botão de pegar o valor do InputText
-        /*
-        btnResolver.setOnClickListener(){
-
-
-            //txtResultado.text = celulas[3].celula?.toString()
-
-            //Obtem-se o item da celula na posição numero 3
-            txtResultado.text = rvMatriz.layoutManager?.findViewByPosition(3)?.EdtCelula?.editText?.text.toString()
-        }*/
-
-
+            val matriz_I = matriz.matrizInversa()
+        }
     }
 
     //Função que inicia o adapter com o RecycleView
@@ -164,7 +192,7 @@ class MainActivity : AppCompatActivity() {
 
     //Adiciona um valor aleatorio para a celula
     private fun addCelulaAleatoria() {
-        val numero = Random.nextInt(20)
+        val numero = Random.nextInt(20).toDouble()
 
         val celula = Celula(numero)
 
@@ -198,7 +226,6 @@ class MainActivity : AppCompatActivity() {
 
         //Seleciona onde o cursor irá parar
         edtLinhas.requestFocus()
-
 
         initRecyclerView(colunas)
 
