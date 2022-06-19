@@ -8,4 +8,9 @@
     <string name="btn_aleatorio">Aleatorio</string>
 
     <string name="des_btn_ir">Botão Ir</string>
+
+    <plurals name="quant_text">
+        <item quantity="one">1 matriz adicionada</item>
+        <item quantity="other">%d matrizes adicionadas</item>
+    </plurals>
 </resources>

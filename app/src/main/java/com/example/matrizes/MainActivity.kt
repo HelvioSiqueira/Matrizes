@@ -122,6 +122,9 @@ class MainActivity : AppCompatActivity() {
             celulas.clear()
             adapter.notifyDataSetChanged()
             Toast.makeText(this, "Matriz adicionada!", Toast.LENGTH_LONG).show()
+
+            quantMatrizes.text = resources.getQuantityString(R.plurals.quant_text, lista_vetores.count(), lista_vetores.count())
+            quantMatrizes.visibility = View.VISIBLE
         }
 
 
