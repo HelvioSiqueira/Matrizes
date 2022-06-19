@@ -39,9 +39,6 @@ class ResultanteActivity : AppCompatActivity() {
         val colunas = intent.getIntExtra("colunas", 2)
         val vetor = intent.getDoubleArrayExtra("array")
 
-        Log.i("HSV", "${vetor?.joinToString()}")
-        Log.i("HSV", "$colunas")
-
         initRecyclerView(colunas)
 
         var cont = 0

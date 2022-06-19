@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_matriz.view.*
-import org.parceler.Parcels
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -100,15 +99,10 @@ class MainActivity : AppCompatActivity() {
 
                 val intent = Intent(this, ResultanteActivity::class.java)
 
-                Log.i("HSV", "${matriz_S_vetor.joinToString()}")
-                Log.i("HSV", "$matriz_S_colunas")
-
                 intent.putExtra("colunas", matriz_S_colunas)
                 intent.putExtra("array", matriz_S_vetor)
 
                 startActivity(intent)
-
-                txtResultado.text = matriz_S_vetor.toString()
             }
 
             catch (e: Exception){
@@ -145,10 +139,12 @@ class MainActivity : AppCompatActivity() {
                 var vetor = arrayOf<Double>()
 
                 for(x in celulas.indices){
-                    val numero_na_celula = rvMatriz.layoutManager?.findViewByPosition(x)?.EdtCelula?.editText?.text.toString()
+                    val numero_na_celula = rvMatriz.layoutManager!!.findViewByPosition(x)!!.EdtCelula!!.editText!!.text.toString()
 
                     vetor += numero_na_celula.toDouble()
                 }
+
+                txtResultado.text = vetor.joinToString()
 
                 lista_vetores += vetor
             } else {
