@@ -8,6 +8,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilLinhas"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/tilColunas"
@@ -26,6 +27,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilColunas"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@id/btnOk"
@@ -88,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_add_24"
+        android:src="@drawable/ic_arrow_up_24"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -151,6 +153,16 @@
                 android:layout_height="wrap_content"
                 app:backgroundTint="@color/purple_200"
                 android:src="@drawable/ic_baseline_label_important_24"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="5dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnMaisUma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/purple_200"
+                android:src="@drawable/ic_plus_1_24"
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_marginVertical="5dp"/>

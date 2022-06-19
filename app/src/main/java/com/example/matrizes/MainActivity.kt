@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private var celulas = mutableListOf<Celula>()
     private var adapter = MatrizAdapter(celulas)
     private var COLUNAS = 0
+    private var vetores = arrayOf<Array<Double>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,21 +58,38 @@ class MainActivity : AppCompatActivity() {
 
         btnDeterminante.setOnClickListener{
 
-            var vetor = arrayOf<Double>()
+            if(celulas.isNotEmpty()){
+                var vetor = arrayOf<Double>()
 
-            //Pega os valores das celulas
-            for(x in celulas.indices){
+                //Pega os valores das celulas
+                for(x in celulas.indices){
 
-                //Quando a matriz é gerada com numeros aleatorios ela já vai adicionada com os valores
-                //Mas quando é adicionado um por um não é assim, pois os elementos em cada celula em valor nulo
-                //Aqui eu pego cada elemento na matriz por meio da posição da view no mutableList
-                val numero_na_celula = rvMatriz.layoutManager?.findViewByPosition(x)?.EdtCelula?.editText?.text.toString()
+                    //Quando a matriz é gerada com numeros aleatorios ela já vai adicionada com os valores
+                    //Mas quando é adicionado um por um não é assim, pois os elementos em cada celula em valor nulo
+                    //Aqui eu pego cada elemento na matriz por meio da posição da view no mutableList
+                    val numero_na_celula = rvMatriz.layoutManager?.findViewByPosition(x)?.EdtCelula?.editText?.text.toString()
 
-                vetor += numero_na_celula.toDouble()
+                    vetor += numero_na_celula.toDouble()
+                }
+
+                vetores += vetor
+
+                val matriz = Matriz(vetores, arrayOf(COLUNAS))
+
+                txtResultado.text = matriz.determinante().toString()
+            } else {
+                Toast.makeText(this, "Adicione a matriz", Toast.LENGTH_LONG).show()
             }
-            val matriz = Matriz(arrayOf(vetor), arrayOf(COLUNAS))
 
-            txtResultado.text = matriz.determinante().toString()
+            vetores = arrayOf<Array<Double>>()
+        }
+
+        btnMaisUma.setOnClickListener{
+            if(celulas.isEmpty()){
+
+            } else {
+                Toast.makeText(this, "Adicione a matriz", Toast.LENGTH_LONG).show()
+            }
         }
 
 
