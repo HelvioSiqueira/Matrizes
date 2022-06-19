@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 app:backgroundTint="@color/purple_200"
-                android:src="@drawable/ic_multpl_24"
+                android:src="@drawable/ic_add_24"
                 android:clickable="true"
                 android:focusable="true"
                 />
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 app:backgroundTint="@color/purple_200"
-                android:src="@drawable/ic_add_24"
+                android:src="@drawable/ic_multpl_24"
                 android:clickable="true"
                 android:focusable="true"
                 />

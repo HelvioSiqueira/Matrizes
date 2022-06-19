@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_matriz.*
 import kotlinx.android.synthetic.main.item_matriz.view.*
 import kotlin.random.Random
 
@@ -17,7 +16,8 @@ class MainActivity : AppCompatActivity() {
     private var celulas = mutableListOf<Celula>()
     private var adapter = MatrizAdapter(celulas)
     private var COLUNAS = 0
-    private var vetores = arrayOf<Array<Double>>()
+    private var lista_colunas = arrayOf<Int>()
+    private var lista_vetores = arrayOf<Array<Double>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,24 +72,56 @@ class MainActivity : AppCompatActivity() {
                     vetor += numero_na_celula.toDouble()
                 }
 
-                vetores += vetor
+                lista_vetores += vetor
 
-                val matriz = Matriz(vetores, arrayOf(COLUNAS))
+                val matriz = Matriz(lista_vetores, arrayOf(COLUNAS))
 
                 txtResultado.text = matriz.determinante().toString()
             } else {
                 Toast.makeText(this, "Adicione a matriz", Toast.LENGTH_LONG).show()
             }
 
-            vetores = arrayOf<Array<Double>>()
+            lista_vetores = arrayOf<Array<Double>>()
+            lista_colunas = arrayOf<Int>()
+        }
+
+        btnSoma.setOnClickListener{
+            val matriz = Matriz(lista_vetores, lista_colunas)
+
+            try {
+                matriz.somaMatrizes()
+
+                Toast.makeText(this, "Somado", Toast.LENGTH_LONG).show()
+            }
+
+            catch (e: Exception){
+                Toast.makeText(this, "As matrizes são diferentes!", Toast.LENGTH_LONG).show()
+            }
+
+            finally {
+                lista_vetores = arrayOf<Array<Double>>()
+                lista_colunas = arrayOf<Int>()
+            }
         }
 
         btnMaisUma.setOnClickListener{
-            if(celulas.isEmpty()){
+            if(celulas.isNotEmpty()){
+                var vetor = arrayOf<Double>()
 
+                for(x in celulas.indices){
+                    val numero_na_celula = rvMatriz.layoutManager?.findViewByPosition(x)?.EdtCelula?.editText?.text.toString()
+
+                    vetor += numero_na_celula.toDouble()
+                }
+
+                lista_vetores += vetor
             } else {
                 Toast.makeText(this, "Adicione a matriz", Toast.LENGTH_LONG).show()
             }
+
+            celulas.clear()
+            adapter.notifyDataSetChanged()
+            Toast.makeText(this, "Matriz adicionada!", Toast.LENGTH_LONG).show()
         }
 
 
@@ -155,7 +187,7 @@ class MainActivity : AppCompatActivity() {
         val colunas = edtColuna.toInt()
         val linhas = edtLinha.toInt()
 
-        COLUNAS = colunas
+        lista_colunas += colunas
 
         //Limpa os inputText
         edtColunas.text?.clear()
