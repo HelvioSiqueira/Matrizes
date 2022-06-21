@@ -76,19 +76,19 @@ class Matriz(vetor: Array<Array<Double>>, colunas: Array<Int>) {
     }
 
     //Função que inverte a matriz
-    fun matrizInversa(): Array<Array<Any>> {
+    fun matrizInversa(): Array<Array<Double>> {
 
         val vetor_colunas = mutableListOf<Double>()
 
         var matriz_u = matriz.last()
 
         //Cria a variavel que irá armazenar a matriz inversa
-        var matriz_I = arrayOf<Array<Any>>()
+        var matriz_I = arrayOf<Array<Double>>()
 
         //O primeiro for servirá para percorrer as colunas
         for (x in matriz_u[0].indices) {
             //Cria e zera o array que irá armazenar cada numero da linha
-            var linhas = arrayOf<Any>()
+            var linhas = arrayOf<Double>()
 
             //Esse for irá percorrer cada elemento da linha
             for (y in matriz_u.indices) {

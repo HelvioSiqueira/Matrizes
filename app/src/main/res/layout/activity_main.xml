@@ -108,6 +108,7 @@
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="5dp"
         android:contentDescription="@string/des_btn_ir" />
 
     <!--Linear layout contendo um linear layout com dois butões-->
@@ -129,6 +130,7 @@
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnSoma"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -178,7 +180,7 @@
                 android:src="@drawable/ic_plus_1_24"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginVertical="5dp"/>
+                android:layout_marginTop="5dp"/>
 
         </LinearLayout>
 

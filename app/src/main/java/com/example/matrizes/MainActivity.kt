@@ -91,6 +91,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSoma.setOnClickListener{
+
             if(lista_vetores.size > 1){
                 val matriz = Matriz(lista_vetores, lista_colunas)
 
@@ -117,6 +118,7 @@ class MainActivity : AppCompatActivity() {
                     lista_vetores = arrayOf<Array<Double>>()
                     lista_colunas = arrayOf<Int>()
                     quantMatrizes.visibility = View.INVISIBLE
+                    btnSoma.visibility = View.GONE
                 }
             } else {
                 Toast.makeText(this, "Adicione ao menos duas matrizes", Toast.LENGTH_LONG).show()
@@ -143,6 +145,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnMaisUma.setOnClickListener{
+
             if(celulas.isNotEmpty()){
                 var vetor = arrayOf<Double>()
 
@@ -165,13 +168,29 @@ class MainActivity : AppCompatActivity() {
 
             quantMatrizes.text = resources.getQuantityString(R.plurals.quant_text, lista_vetores.count(), lista_vetores.count())
             quantMatrizes.visibility = View.VISIBLE
+
+            if(lista_vetores.size >= 2){
+                btnSoma.visibility = View.VISIBLE
+            }
+
         }
 
         btnTransversa.setOnClickListener{
             val matriz = Matriz(lista_vetores, lista_colunas)
 
             val matriz_I = matriz.matrizInversa()
-            val matriz_I_v = matriz.matrizVetor(matriz_I)
+            val matriz_I_vetor = matriz.matrizVetor(matriz_I)
+            val matriz_I_colunas = matriz.getColunas(matriz_I)
+
+            intent = Intent(this, ResultanteActivity::class.java)
+            intent.putExtra("array", matriz_I_vetor)
+            intent.putExtra("colunas", matriz_I_colunas)
+
+            startActivity(intent)
+
+            lista_vetores = arrayOf<Array<Double>>()
+            lista_colunas = arrayOf<Int>()
+            quantMatrizes.visibility = View.INVISIBLE
         }
     }
 
