@@ -1,5 +1,7 @@
 package com.example.matrizes
 
+import android.util.Log
+
 class Matriz(vetor: Array<Array<Double>>, colunas: Array<Int>) {
 
     //Para ser posivel somar e multiplicar transformei
@@ -107,8 +109,8 @@ class Matriz(vetor: Array<Array<Double>>, colunas: Array<Int>) {
     //Então ela deve primeiro passa pela fun vetorMatriz()
     fun somaMatrizes(): Array<Array<Double>> {
 
-        var matriz_1 = matriz[0]
-        var matriz_2 = matriz[1]
+        var matriz_1 = matriz[matriz.size - 1]
+        var matriz_2 = matriz[matriz.size - 2]
 
         var matriz_S = arrayOf<Array<Double>>()
 
@@ -194,7 +196,9 @@ class Matriz(vetor: Array<Array<Double>>, colunas: Array<Int>) {
     //Então ela deve primeiro passa pela fun vetorMatriz()
     fun determinante(): Double {
 
-        var matriz_u = matriz.last()
+        var matriz_u = matriz[0]
+
+        Log.i("HSV", "${matriz[0][0].joinToString()}")
 
         //Adiciona as duas colunas que seram necessarias na formula de Sarras
         val matriz_D = addColunas(matriz_u)
@@ -238,6 +242,9 @@ class Matriz(vetor: Array<Array<Double>>, colunas: Array<Int>) {
 
         //cont agora receberá o indice do ultimo elemento em qualquer linha
         //Como agora as operações serão feitas na 3 diagonais voltando cont será decrementado
+
+
+
         cont = matriz_D[0].size - 1
 
         //contInicial irá salvar a posição inicial de cont

@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/edt_Linhas"
+            android:inputType="number"
             android:lines="1"
             android:maxLength="2"/>
 
@@ -39,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/edt_colunas"
+            android:inputType="number"
             android:lines="1"
             android:maxLength="2"/>
 

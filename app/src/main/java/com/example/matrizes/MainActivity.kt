@@ -72,11 +72,14 @@ class MainActivity : AppCompatActivity() {
                     val numero_na_celula = rvMatriz.layoutManager?.findViewByPosition(x)?.EdtCelula?.editText?.text.toString()
 
                     vetor += numero_na_celula.toDouble()
+
                 }
 
                 lista_vetores += vetor
 
-                val matriz = Matriz(lista_vetores, arrayOf(COLUNAS))
+                val matriz = Matriz(lista_vetores, lista_colunas)
+
+                Log.i("HSV", matriz.getMatriz()[0].joinToString())
 
                 txtResultado.text = matriz.determinante().toString()
             } else {
@@ -88,30 +91,35 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSoma.setOnClickListener{
-            val matriz = Matriz(lista_vetores, lista_colunas)
+            if(lista_vetores.size > 1){
+                val matriz = Matriz(lista_vetores, lista_colunas)
 
-            try {
-                val matriz_S = matriz.somaMatrizes()
-                val matriz_S_vetor = matriz.matrizVetor(matriz_S)
-                val matriz_S_colunas = matriz.getColunas(matriz_S)
+                try {
+                    val matriz_S = matriz.somaMatrizes()
+                    val matriz_S_vetor = matriz.matrizVetor(matriz_S)
+                    val matriz_S_colunas = matriz.getColunas(matriz_S)
 
-                Toast.makeText(this, "Somado", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Somado", Toast.LENGTH_LONG).show()
 
-                val intent = Intent(this, ResultanteActivity::class.java)
+                    val intent = Intent(this, ResultanteActivity::class.java)
 
-                intent.putExtra("colunas", matriz_S_colunas)
-                intent.putExtra("array", matriz_S_vetor)
+                    intent.putExtra("colunas", matriz_S_colunas)
+                    intent.putExtra("array", matriz_S_vetor)
 
-                startActivity(intent)
-            }
+                    startActivity(intent)
+                }
 
-            catch (e: Exception){
-                Toast.makeText(this, "As matrizes são diferentes!", Toast.LENGTH_LONG).show()
-            }
+                catch (e: Exception){
+                    Toast.makeText(this, "As matrizes são diferentes!", Toast.LENGTH_LONG).show()
+                }
 
-            finally {
-                lista_vetores = arrayOf<Array<Double>>()
-                lista_colunas = arrayOf<Int>()
+                finally {
+                    lista_vetores = arrayOf<Array<Double>>()
+                    lista_colunas = arrayOf<Int>()
+                    quantMatrizes.visibility = View.INVISIBLE
+                }
+            } else {
+                Toast.makeText(this, "Adicione ao menos duas matrizes", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -148,7 +156,7 @@ class MainActivity : AppCompatActivity() {
 
                 lista_vetores += vetor
             } else {
-                Toast.makeText(this, "Adicione a matriz", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Adicione duas matrizes", Toast.LENGTH_LONG).show()
             }
 
             celulas.clear()
@@ -163,6 +171,7 @@ class MainActivity : AppCompatActivity() {
             val matriz = Matriz(lista_vetores, lista_colunas)
 
             val matriz_I = matriz.matrizInversa()
+            val matriz_I_v = matriz.matrizVetor(matriz_I)
         }
     }
 
