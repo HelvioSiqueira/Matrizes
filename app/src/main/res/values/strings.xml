@@ -9,6 +9,11 @@
 
     <string name="des_btn_ir">Botão Ir</string>
 
+    <string name="resultado_transversa">Matriz Transversa</string>
+    <string name="resultado_soma">Soma das Matrizes</string>
+    <string name="resultado_mult">Multiplicação das Matrizes</string>
+    <string name="resultado_determinante">Determinante da Matriz</string>
+
     <plurals name="quant_text">
         <item quantity="one">1 matriz adicionada</item>
         <item quantity="other">%d matrizes adicionadas</item>

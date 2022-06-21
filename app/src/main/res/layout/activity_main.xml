@@ -76,16 +76,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilLinhas" />
 
-    <TextView
-        android:id="@+id/txtResultado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Oi"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvMatriz" />
-
     <!--
     <Button
         android:id="@+id/btnResolver"
@@ -142,6 +132,7 @@
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnMultiplicar"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -180,7 +171,7 @@
                 android:src="@drawable/ic_plus_1_24"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginVertical="5dp"/>
 
         </LinearLayout>
 

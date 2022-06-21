@@ -16,6 +16,10 @@ class ResultanteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_matriz_resultante)
 
+        val texto_lay = intent.getStringExtra("titulo")
+
+        txtResultado.text = texto_lay
+
         gerarMatriz()
     }
 

@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_matriz_resultante.*
 import kotlinx.android.synthetic.main.item_matriz.view.*
 import kotlin.random.Random
 
@@ -79,9 +80,20 @@ class MainActivity : AppCompatActivity() {
 
                 val matriz = Matriz(lista_vetores, lista_colunas)
 
-                Log.i("HSV", matriz.getMatriz()[0].joinToString())
+                var determinante = DoubleArray(0)
 
-                txtResultado.text = matriz.determinante().toString()
+                val intent = Intent(this, ResultanteActivity::class.java)
+
+                determinante += matriz.determinante()
+
+                val texto = resources.getString(R.string.resultado_determinante)
+
+                intent.putExtra("array", determinante)
+                intent.putExtra("colunas", arrayOf(1))
+                intent.putExtra("titulo", texto)
+
+                startActivity(intent)
+
             } else {
                 Toast.makeText(this, "Adicione a matriz", Toast.LENGTH_LONG).show()
             }
@@ -104,8 +116,11 @@ class MainActivity : AppCompatActivity() {
 
                     val intent = Intent(this, ResultanteActivity::class.java)
 
+                    val texto = resources.getString(R.string.resultado_soma)
+
                     intent.putExtra("colunas", matriz_S_colunas)
                     intent.putExtra("array", matriz_S_vetor)
+                    intent.putExtra("titulo", texto)
 
                     startActivity(intent)
                 }
@@ -119,6 +134,7 @@ class MainActivity : AppCompatActivity() {
                     lista_colunas = arrayOf<Int>()
                     quantMatrizes.visibility = View.INVISIBLE
                     btnSoma.visibility = View.GONE
+                    btnMultiplicar.visibility = View.GONE
                 }
             } else {
                 Toast.makeText(this, "Adicione ao menos duas matrizes", Toast.LENGTH_LONG).show()
@@ -126,21 +142,41 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnMultiplicar.setOnClickListener{
-            val matriz = Matriz(lista_vetores, lista_colunas)
+            if(lista_vetores.size > 1){
+                val matriz = Matriz(lista_vetores, lista_colunas)
 
-            try {
-                matriz.multMatrizes()
+                try {
+                    var matriz_M = matriz.multMatrizes()
+                    var matriz_M_vetor = matriz.matrizVetor(matriz_M)
+                    var matriz_M_colunas = matriz.getColunas(matriz_M)
 
-                Toast.makeText(this, "Multiplicado", Toast.LENGTH_LONG).show()
-            }
+                    Toast.makeText(this, "Multiplicado", Toast.LENGTH_LONG).show()
 
-            catch (e: Exception){
-                Toast.makeText(this, "L da matriz 1 deve ser igual a C da matriz 25", Toast.LENGTH_LONG).show()
-            }
+                    val intent = Intent(this, ResultanteActivity::class.java)
 
-            finally {
-                lista_vetores = arrayOf<Array<Double>>()
-                lista_colunas = arrayOf<Int>()
+                    val texto = resources.getString(R.string.resultado_mult)
+
+                    intent.putExtra("colunas", matriz_M_colunas)
+                    intent.putExtra("array", matriz_M_vetor)
+                    intent.putExtra("titulo", texto)
+
+                    startActivity(intent)
+
+                }
+
+                catch (e: Exception){
+                    Toast.makeText(this, "L da matriz 1 deve ser igual a C da matriz 25", Toast.LENGTH_LONG).show()
+                }
+
+                finally {
+                    lista_vetores = arrayOf<Array<Double>>()
+                    lista_colunas = arrayOf<Int>()
+                    quantMatrizes.visibility = View.INVISIBLE
+                    btnMultiplicar.visibility = View.GONE
+                    btnSoma.visibility = View.GONE
+                }
+            } else {
+                Toast.makeText(this, "Adicione ao menos duas matrizes", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -154,8 +190,6 @@ class MainActivity : AppCompatActivity() {
 
                     vetor += numero_na_celula.toDouble()
                 }
-
-                txtResultado.text = vetor.joinToString()
 
                 lista_vetores += vetor
             } else {
@@ -171,26 +205,37 @@ class MainActivity : AppCompatActivity() {
 
             if(lista_vetores.size >= 2){
                 btnSoma.visibility = View.VISIBLE
+                btnMultiplicar.visibility = View.VISIBLE
             }
 
         }
 
         btnTransversa.setOnClickListener{
-            val matriz = Matriz(lista_vetores, lista_colunas)
+            if(lista_vetores.size > 0){
+                val matriz = Matriz(lista_vetores, lista_colunas)
 
-            val matriz_I = matriz.matrizInversa()
-            val matriz_I_vetor = matriz.matrizVetor(matriz_I)
-            val matriz_I_colunas = matriz.getColunas(matriz_I)
+                val matriz_I = matriz.matrizInversa()
+                val matriz_I_vetor = matriz.matrizVetor(matriz_I)
+                val matriz_I_colunas = matriz.getColunas(matriz_I)
 
-            intent = Intent(this, ResultanteActivity::class.java)
-            intent.putExtra("array", matriz_I_vetor)
-            intent.putExtra("colunas", matriz_I_colunas)
+                val texto = resources.getString(R.string.resultado_transversa)
 
-            startActivity(intent)
+                Log.i("HSV", texto)
 
-            lista_vetores = arrayOf<Array<Double>>()
-            lista_colunas = arrayOf<Int>()
-            quantMatrizes.visibility = View.INVISIBLE
+                intent = Intent(this, ResultanteActivity::class.java)
+                intent.putExtra("array", matriz_I_vetor)
+                intent.putExtra("colunas", matriz_I_colunas)
+                intent.putExtra("titulo", texto)
+
+                startActivity(intent)
+
+                lista_vetores = arrayOf<Array<Double>>()
+                lista_colunas = arrayOf<Int>()
+                quantMatrizes.visibility = View.INVISIBLE
+
+            } else {
+                Toast.makeText(this, "Adicione a matriz", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
