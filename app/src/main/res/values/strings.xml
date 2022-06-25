@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Matrizes</string>
 
+    <string name="nome">Feito por Helvio Siqueira</string>
+
     <string name="edt_Linhas">Linhas</string>
     <string name="edt_colunas">Colunas</string>
 

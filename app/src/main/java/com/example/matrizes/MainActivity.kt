@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_matriz_resultante.*
 import kotlinx.android.synthetic.main.item_matriz.view.*
 import kotlin.random.Random
 
@@ -89,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                 val texto = resources.getString(R.string.resultado_determinante)
 
                 intent.putExtra("array", determinante)
-                intent.putExtra("colunas", arrayOf(1))
+                intent.putExtra("colunas", 1)
                 intent.putExtra("titulo", texto)
 
                 startActivity(intent)

@@ -1,10 +1,8 @@
 package com.example.matrizes
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_matriz_resultante.*
 
 class ResultanteActivity : AppCompatActivity() {
@@ -40,7 +38,7 @@ class ResultanteActivity : AppCompatActivity() {
 
     private fun gerarMatriz() {
 
-        val colunas = intent.getIntExtra("colunas", 2)
+        val colunas = intent.getIntExtra("colunas", 1)
         val vetor = intent.getDoubleArrayExtra("array")
 
         initRecyclerView(colunas)
