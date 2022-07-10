@@ -1,5 +1,7 @@
 # Matrizes
 
+![](images/print1.png) ![](images/print2.png) ![](images/print3.png)
+
 Este é um app para resolução alguns cálculos de matrizes, proposto como 3° nota da matéria de matemática básica do meu curso de ADS. O app em si resolve a 
 determinante da matriz (até matrizes de ordem 3), soma, multiplicação (Ambas até o momento somente com duas matrizes) e mostra a matriz transposta. 
 
